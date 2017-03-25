@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res‐auto"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <item
+        android:title="Add"
+        app1:showAsAction="always"
+        android:id="@+id/action_addTieckt"
+        ></item>
+    <item
+        android:title="Ticket List"
+        app1:showAsAction="always"
+        android:id="@+id/action_ticketList"
+        ></item>
+    <item
+        android:title="Settings"
+        app1:showAsAction="ifRoom"
+        android:id="@+id/action_settings"
+        ></item>
+
+</menu>

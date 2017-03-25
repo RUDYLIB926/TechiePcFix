@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="cis470.techiepcfix.UpdateTicketActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Ticket"
+        android:textColor="@color/textColor"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/update_tx1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Name: "
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_toStartOf="@+id/update_name" />
+
+        <EditText
+            android:id="@+id/update_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Click here to enter a name"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/update_tx2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/update_name"
+            android:layout_toLeftOf="@+id/update_name"
+            android:layout_toStartOf="@+id/update_name"
+            android:text="Date Created: "
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/update_date_created"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Click here to select a date"
+            android:inputType="date"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_below="@+id/update_name"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/update_tx3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Problem: "
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/update_date_created"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/update_date_created" />
+
+        <EditText
+            android:id="@+id/update_problem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Click here to state the problem"
+            android:inputType="textLongMessage"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_below="@+id/update_date_created"
+            android:layout_alignStart="@+id/update_date_created" />
+
+        <TextView
+            android:id="@+id/update_tx4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: "
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/update_problem"
+            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@+id/update_tx2" />
+
+        <EditText
+            android:id="@+id/update_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/update_problem"
+            android:layout_alignStart="@+id/update_problem"
+            android:layout_below="@+id/update_problem"
+            android:hint="Click here to change the status"
+            android:inputType="textLongMessage"
+            android:textColor="@color/textColor" />
+
+        <TextView
+            android:id="@+id/update_tx5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fix date: "
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/update_status"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/update_status" />
+
+        <EditText
+            android:id="@+id/update_date_fixed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Click here to select a date"
+            android:inputType="date"
+            android:textColor="@color/textColor"
+            android:layout_below="@+id/update_status"
+            android:layout_alignRight="@+id/update_name"
+            android:layout_alignEnd="@+id/update_name" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/update_ticket_btn"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tx5"
+        android:layout_marginTop="15dp"
+        android:text="Update Ticket"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:background="@color/colorAccent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:onClick="updateTicket"/>
+</LinearLayout>
