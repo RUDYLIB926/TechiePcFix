@@ -50,36 +50,30 @@ public class UpdateTicketActivity extends AppCompatActivity {
         String date_fixed = ticket.dateToString(ticket.getFixDate());
         DateFixed.setText(date_fixed);
 
+    }
 
-        DateCreated.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateCreated.setText("");
-                DatePickerDialog dateDialog = new DatePickerDialog(
-                        UpdateTicketActivity.this,
-                        datePicker1,
-                        //first time around show current date
-                        myCalendar.get(Calendar.YEAR),
-                        myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.show();
-            }
-        });
+    public void setDateCreated(View v){
+        DateCreated.setText("");
+        DatePickerDialog dateDialog = new DatePickerDialog(
+                UpdateTicketActivity.this,
+                datePicker1,
+                //first time around show current date
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+        dateDialog.show();
+    }
 
-        DateFixed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateFixed.setText("");
-                DatePickerDialog dateDialog = new DatePickerDialog(
-                        UpdateTicketActivity.this,
-                        datePicker2,
-                        //first time around show current date
-                        myCalendar.get(Calendar.YEAR),
-                        myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.show();
-            }
-        });
+    public void setDateFixed(View v){
+        DateFixed.setText("");
+        DatePickerDialog dateDialog = new DatePickerDialog(
+                UpdateTicketActivity.this,
+                datePicker2,
+                //first time around show current date
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+        dateDialog.show();
     }
 
     DatePickerDialog.OnDateSetListener datePicker1 = new

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context="cis470.techiepcfix.UpdateTicketActivity"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -72,7 +70,8 @@
             android:textColor="@color/textColor"
             android:textSize="18dp"
             android:layout_below="@+id/update_name"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:onClick="setDateCreated"/>
 
         <TextView
             android:id="@+id/update_tx3"
@@ -141,7 +140,8 @@
             android:textColor="@color/textColor"
             android:layout_below="@+id/update_status"
             android:layout_alignRight="@+id/update_name"
-            android:layout_alignEnd="@+id/update_name" />
+            android:layout_alignEnd="@+id/update_name"
+            android:onClick="setDateFixed"/>
 
     </RelativeLayout>
 

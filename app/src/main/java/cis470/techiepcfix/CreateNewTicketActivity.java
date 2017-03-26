@@ -1,10 +1,8 @@
 package cis470.techiepcfix;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 public class CreateNewTicketActivity extends AppCompatActivity {
 
     EditText DateCreated, DateFixed;
-        Calendar myCalendar = Calendar.getInstance();
+    Calendar myCalendar = Calendar.getInstance();
     static ArrayList<Ticket> ticketList =new ArrayList<>();
 
     @Override
@@ -27,41 +25,35 @@ public class CreateNewTicketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_ticket);
 
-
-
-
-
-        DateCreated.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateCreated.setText("");
-                DatePickerDialog dateDialog = new DatePickerDialog(
-                        CreateNewTicketActivity.this,
-                        datePicker1,
-                        //first time around show current date
-                        myCalendar.get(Calendar.YEAR),
-                        myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.show();
-            }
-        });
-
-        DateFixed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateFixed.setText("");
-                DatePickerDialog dateDialog = new DatePickerDialog(
-                        CreateNewTicketActivity.this,
-                        datePicker2,
-                        //first time around show current date
-                        myCalendar.get(Calendar.YEAR),
-                        myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.show();
-            }
-        });
+        DateCreated = (EditText) findViewById(R.id.date_created);
+        DateFixed = (EditText) findViewById(R.id.date_fixed);
 
     }
+
+    public void setDateCreated(View v){
+        DateCreated.setText("");
+        DatePickerDialog dateDialog = new DatePickerDialog(
+                CreateNewTicketActivity.this,
+                datePicker1,
+                //first time around show current date
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+        dateDialog.show();
+    }
+
+    public void setDateFixed(View v){
+        DateFixed.setText("");
+        DatePickerDialog dateDialog = new DatePickerDialog(
+                CreateNewTicketActivity.this,
+                datePicker2,
+                //first time around show current date
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+        dateDialog.show();
+    }
+
 
     DatePickerDialog.OnDateSetListener datePicker1 = new
             DatePickerDialog.OnDateSetListener() {

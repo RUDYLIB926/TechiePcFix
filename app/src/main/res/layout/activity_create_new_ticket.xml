@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context="cis470.techiepcfix.CreateNewTicketActivity"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -73,7 +71,8 @@
             android:hint="Click here to select a date"
             android:inputType="date"
             android:textColor="@color/textColor"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:onClick="setDateCreated"/>
 
         <TextView
             android:id="@+id/tx3"
@@ -146,7 +145,8 @@
             android:textColor="@color/textColor"
             android:layout_below="@+id/status"
             android:layout_alignRight="@+id/name"
-            android:layout_alignEnd="@+id/name" />
+            android:layout_alignEnd="@+id/name"
+            android:onClick="setDateFixed"/>
 
     </RelativeLayout>
 
