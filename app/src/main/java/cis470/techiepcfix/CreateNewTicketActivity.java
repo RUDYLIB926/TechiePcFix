@@ -1,5 +1,13 @@
 package cis470.techiepcfix;
 
+// Homework 2
+// 2500491
+// Rudolph Libertini
+// 3/24/2017
+
+
+
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
@@ -35,11 +43,6 @@ public class CreateNewTicketActivity extends AppCompatActivity {
         DateCreated = (EditText) findViewById(R.id.date_created);
         DateFixed = (EditText) findViewById(R.id.date_fixed);
 
-//        for debugging
-//        Ticket one = new Ticket(1,"Name1", myCalendar.getTime(), "things", "ture", myCalendar.getTime());
-//        Ticket two = new Ticket(2, "Name2", myCalendar.getTime(), "things", "ture", myCalendar.getTime());
-//        ticketList.add(one);
-//        ticketList.add(two);
     }
 
     public void setDateCreated(View v){
@@ -134,6 +137,11 @@ public class CreateNewTicketActivity extends AppCompatActivity {
             return true;
         }
         if(item.getItemId()==R.id.action_ticketList){
+        //for debugging
+//        Ticket one = new Ticket(1,"Name1", myCalendar.getTime(),"things","ture", myCalendar.getTime());
+//        Ticket two = new Ticket(2,"Name2", myCalendar.getTime(),"things","ture", myCalendar.getTime());
+//        ticketList.add(one);
+//        ticketList.add(two);
             Intent intent = new Intent(CreateNewTicketActivity.this, ListTicketsActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
             startActivity(intent);

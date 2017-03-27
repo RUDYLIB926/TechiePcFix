@@ -1,6 +1,8 @@
 package cis470.techiepcfix;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -52,7 +54,8 @@ public class ListTicketsActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+
         if(item.getItemId()==R.id.update_update){
             Intent intent = new Intent(ListTicketsActivity.this, UpdateTicketActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
@@ -62,11 +65,26 @@ public class ListTicketsActivity extends AppCompatActivity {
             finish();
             return true;
         }
+
         if(item.getItemId()==R.id.update_delete){
-            ticketList.remove(info.position);
-            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ticketList);
-            Ticket_List = (ListView) findViewById(R.id.ticket_list);
-            Ticket_List.setAdapter(adapter);
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            deleteTicket(info.position);
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            break;
+                    }
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(ListTicketsActivity.this);
+            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+
             return true;
         }
         return super.onContextItemSelected(item);
@@ -99,5 +117,17 @@ public class ListTicketsActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void deleteTicket(int position){
+        Ticket ticket1;
+        ticketList.remove(position);
+        for(int i=0; i<ticketList.size(); i++){
+            ticket1 = ticketList.get(i);
+            ticket1.setTicketId(i+1);
+        }
+        adapter = new ArrayAdapter<>(ListTicketsActivity.this, android.R.layout.simple_list_item_1, ticketList);
+        Ticket_List = (ListView) findViewById(R.id.ticket_list);
+        Ticket_List.setAdapter(adapter);
     }
 }
