@@ -24,6 +24,8 @@ public class CreateNewTicketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_ticket);
+        Bundle extras = getIntent().getExtras();
+        ticketList= extras.getParcelableArrayList("TICKETS");
 
         DateCreated = (EditText) findViewById(R.id.date_created);
         DateFixed = (EditText) findViewById(R.id.date_fixed);
@@ -31,7 +33,6 @@ public class CreateNewTicketActivity extends AppCompatActivity {
     }
 
     public void setDateCreated(View v){
-        DateCreated.setText("");
         DatePickerDialog dateDialog = new DatePickerDialog(
                 CreateNewTicketActivity.this,
                 datePicker1,
@@ -43,7 +44,6 @@ public class CreateNewTicketActivity extends AppCompatActivity {
     }
 
     public void setDateFixed(View v){
-        DateFixed.setText("");
         DatePickerDialog dateDialog = new DatePickerDialog(
                 CreateNewTicketActivity.this,
                 datePicker2,
@@ -84,12 +84,11 @@ public class CreateNewTicketActivity extends AppCompatActivity {
         Ticket newTicket = new Ticket();
         ticketList.add(newTicket);
 
-        newTicket.setTicketId(ticketList.indexOf(newTicket));
+        newTicket.setTicketId(ticketList.indexOf(newTicket)+1);
 
         EditText Name = (EditText)findViewById(R.id.name);
         newTicket.setCustomerName(Name.getText().toString());
 
-        DateCreated = (EditText)findViewById(R.id.date_created);
         String date_created = new String(DateCreated.toString());
         newTicket.setTicketCreateDate(newTicket.stringToDate(date_created));
 
@@ -99,7 +98,6 @@ public class CreateNewTicketActivity extends AppCompatActivity {
         EditText Status = (EditText)findViewById(R.id.status);
         newTicket.setStatus(Status.getText().toString());
 
-        DateFixed = (EditText)findViewById(R.id.date_fixed);
         String date_fixed = new String(DateFixed.toString());
         newTicket.setFixDate(newTicket.stringToDate(date_fixed));
 
@@ -116,12 +114,16 @@ public class CreateNewTicketActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.action_addTieckt){
-            startActivity(new Intent(CreateNewTicketActivity.this, CreateNewTicketActivity.class));
+        if(item.getItemId()==R.id.action_addTicket){
+            Intent intent = new Intent(CreateNewTicketActivity.this, CreateNewTicketActivity.class);
+            intent.putParcelableArrayListExtra("TICKETS",ticketList );
+            startActivity(intent);
             return true;
         }
         if(item.getItemId()==R.id.action_ticketList){
-            startActivity(new Intent(CreateNewTicketActivity.this, ListTicketsActivity.class));
+            Intent intent = new Intent(CreateNewTicketActivity.this, ListTicketsActivity.class);
+            intent.putParcelableArrayListExtra("TICKETS",ticketList );
+            startActivity(intent);
             return true;
         }
         if(item.getItemId()==R.id.action_settings){

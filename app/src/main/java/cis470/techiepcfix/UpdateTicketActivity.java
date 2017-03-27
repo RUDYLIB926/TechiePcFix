@@ -28,13 +28,12 @@ public class UpdateTicketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_ticket);
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            ticket = extras.getParcelable("TICKET");
-        }
+        ticketList = extras.getParcelableArrayList("TICKETS");
+        ticket = extras.getParcelable("TICKET");
+
 
         Name = (EditText)findViewById(R.id.update_name);
         Name.setText(ticket.getCustomerName());
-        ticket.setCustomerName(Name.getText().toString());
 
         DateCreated = (EditText)findViewById(R.id.update_date_created);
         String date_created = ticket.dateToString(ticket.getTicketCreateDate());
@@ -101,22 +100,17 @@ public class UpdateTicketActivity extends AppCompatActivity {
 
     public void updateTicket(View v) {
 
-        ticket.setTicketId(ticketList.indexOf(ticket));
+        ticket.setTicketId(ticketList.indexOf(ticket)+1);
 
-        EditText Name = (EditText)findViewById(R.id.name);
         ticket.setCustomerName(Name.getText().toString());
 
-        DateCreated = (EditText)findViewById(R.id.date_created);
         String date_created = new String(DateCreated.toString());
         ticket.setTicketCreateDate(ticket.stringToDate(date_created));
 
-        EditText Problem = (EditText)findViewById(R.id.problem);
         ticket.setProblem(Problem.getText().toString());
 
-        EditText Status = (EditText)findViewById(R.id.status);
         ticket.setStatus(Status.getText().toString());
 
-        DateFixed = (EditText)findViewById(R.id.date_fixed);
         String date_fixed = new String(DateFixed.toString());
         ticket.setFixDate(ticket.stringToDate(date_fixed));
 
@@ -133,12 +127,16 @@ public class UpdateTicketActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.action_addTieckt){
-            startActivity(new Intent(UpdateTicketActivity.this, CreateNewTicketActivity.class));
+        if(item.getItemId()==R.id.action_addTicket){
+            Intent intent = new Intent(UpdateTicketActivity.this, CreateNewTicketActivity.class);
+            intent.putParcelableArrayListExtra("TICKETS",ticketList );
+            startActivity(intent);
             return true;
         }
         if(item.getItemId()==R.id.action_ticketList){
-            startActivity(new Intent(UpdateTicketActivity.this, ListTicketsActivity.class));
+            Intent intent = new Intent(UpdateTicketActivity.this, ListTicketsActivity.class);
+            intent.putParcelableArrayListExtra("TICKETS",ticketList );
+            startActivity(intent);
             return true;
         }
         if(item.getItemId()==R.id.action_settings){

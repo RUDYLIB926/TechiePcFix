@@ -24,9 +24,8 @@ public class ListTicketsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tickets);
         Bundle extras = getIntent().getExtras();
-        if (extras != null){
-            ticketList= extras.getParcelableArrayList("TICKETS");
-        }
+        ticketList= extras.getParcelableArrayList("TICKETS");
+
 
         ArrayAdapter<Ticket> adapter = new ArrayAdapter<>(this, R.layout.tickets, ticketList);
 
@@ -49,6 +48,7 @@ public class ListTicketsActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         if(item.getItemId()==R.id.update_update){
             Intent intent = new Intent(ListTicketsActivity.this, UpdateTicketActivity.class);
+            intent.putParcelableArrayListExtra("TICKETS",ticketList );
             intent.putExtra("TICKET", info.position);
             startActivity(intent);
             return true;
@@ -68,12 +68,15 @@ public class ListTicketsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.action_addTieckt){
-            startActivity(new Intent(ListTicketsActivity.this, CreateNewTicketActivity.class));
+        if(item.getItemId()==R.id.action_addTicket){
+            Intent intent = new Intent(ListTicketsActivity.this, CreateNewTicketActivity.class);
+            intent.putParcelableArrayListExtra("TICKETS",ticketList );
+            startActivity(intent);
             return true;
         }
         if(item.getItemId()==R.id.action_ticketList){
-            startActivity(new Intent(ListTicketsActivity.this, ListTicketsActivity.class));
+            Intent intent = new Intent(ListTicketsActivity.this, ListTicketsActivity.class);
+            intent.putParcelableArrayListExtra("TICKETS",ticketList );
             return true;
         }
         if(item.getItemId()==R.id.action_settings){
