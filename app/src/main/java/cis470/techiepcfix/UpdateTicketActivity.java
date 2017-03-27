@@ -19,7 +19,7 @@ public class UpdateTicketActivity extends AppCompatActivity {
 
     Ticket ticket = new Ticket();
     EditText Name, DateCreated, Problem, Status, DateFixed;
-    static ArrayList<Ticket> ticketList =new ArrayList<>();
+    ArrayList<Ticket> ticketList =new ArrayList<>();
     Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -28,8 +28,12 @@ public class UpdateTicketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_ticket);
 
         Bundle extras = getIntent().getExtras();
-        ticketList = extras.getParcelableArrayList("TICKETS");
-        ticket = extras.getParcelable("TICKET");
+        if (extras != null) {
+            ticketList = extras.getParcelableArrayList("TICKETS");
+            if (extras.containsKey("TICKET")) {
+                ticket = extras.getParcelable("TICKET");
+            }
+        }
 
 
         Name = (EditText)findViewById(R.id.update_name);

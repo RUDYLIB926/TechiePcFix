@@ -18,15 +18,16 @@ public class CreateNewTicketActivity extends AppCompatActivity {
 
     EditText DateCreated, DateFixed;
     Calendar myCalendar = Calendar.getInstance();
-    static ArrayList<Ticket> ticketList =new ArrayList<>();
+    ArrayList<Ticket> ticketList =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_ticket);
         Bundle extras = getIntent().getExtras();
-        ticketList= extras.getParcelableArrayList("TICKETS");
-
+        if (extras != null) {
+            ticketList = extras.getParcelableArrayList("TICKETS");
+        }
         DateCreated = (EditText) findViewById(R.id.date_created);
         DateFixed = (EditText) findViewById(R.id.date_fixed);
 

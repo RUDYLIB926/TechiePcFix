@@ -17,14 +17,19 @@ import java.util.ArrayList;
 
 public class ListTicketsActivity extends AppCompatActivity {
 
-    static ArrayList<Ticket> ticketList = new ArrayList<>();
+    ArrayList<Ticket> ticketList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tickets);
         Bundle extras = getIntent().getExtras();
-        ticketList= extras.getParcelableArrayList("TICKETS");
+        if (extras != null) {
+            ticketList = extras.getParcelableArrayList("TICKETS");
+        }else{
+            Ticket ticket = new Ticket(0, "not real", null, "no problem", "no status", null);
+            ticketList.add(ticket);
+        }
 
 
         ArrayAdapter<Ticket> adapter = new ArrayAdapter<>(this, R.layout.tickets, ticketList);
