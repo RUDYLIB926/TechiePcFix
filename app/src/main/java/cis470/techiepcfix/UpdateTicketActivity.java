@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,14 +14,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UpdateTicketActivity extends AppCompatActivity {
 
 
-    Ticket ticket = new Ticket();
-    EditText Name, DateCreated, Problem, Status, DateFixed;
-    ArrayList<Ticket> ticketList =new ArrayList<>();
-    Calendar myCalendar = Calendar.getInstance();
+    private Ticket ticket = new Ticket();
+    private int ticket_index;
+    private EditText Name, DateCreated, Problem, Status, DateFixed;
+    private ArrayList<Ticket> ticketList =new ArrayList<>();
+    private Calendar myCalendar = Calendar.getInstance();
+    private Date date1, date2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +34,12 @@ public class UpdateTicketActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             ticketList = extras.getParcelableArrayList("TICKETS");
-            if (extras.containsKey("TICKET")) {
-                ticket = extras.getParcelable("TICKET");
+            if (extras.containsKey("MyTicketIndex")) {
+                ticket_index = extras.getInt("MyTicketIndex");
             }
+            ticket = ticketList.get(ticket_index);
         }
+
 
 
         Name = (EditText)findViewById(R.id.update_name);
@@ -42,6 +48,7 @@ public class UpdateTicketActivity extends AppCompatActivity {
         DateCreated = (EditText)findViewById(R.id.update_date_created);
         String date_created = ticket.dateToString(ticket.getTicketCreateDate());
         DateCreated.setText(date_created);
+        date1 = ticket.getTicketCreateDate();
 
         Problem = (EditText)findViewById(R.id.update_problem);
         Problem.setText(ticket.getProblem());
@@ -52,11 +59,11 @@ public class UpdateTicketActivity extends AppCompatActivity {
         DateFixed = (EditText)findViewById(R.id.update_date_fixed);
         String date_fixed = ticket.dateToString(ticket.getFixDate());
         DateFixed.setText(date_fixed);
+        date2 = ticket.getFixDate();
 
     }
 
     public void setDateCreated(View v){
-        DateCreated.setText("");
         DatePickerDialog dateDialog = new DatePickerDialog(
                 UpdateTicketActivity.this,
                 datePicker1,
@@ -68,7 +75,6 @@ public class UpdateTicketActivity extends AppCompatActivity {
     }
 
     public void setDateFixed(View v){
-        DateFixed.setText("");
         DatePickerDialog dateDialog = new DatePickerDialog(
                 UpdateTicketActivity.this,
                 datePicker2,
@@ -87,7 +93,7 @@ public class UpdateTicketActivity extends AppCompatActivity {
                     myCalendar.set(Calendar.MONTH, month);
                     myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     DateCreated.setText(month+1+"/"+dayOfMonth+"/"+year );
-
+                    date1 = myCalendar.getTime();
                 }
             };
 
@@ -99,28 +105,32 @@ public class UpdateTicketActivity extends AppCompatActivity {
                     myCalendar.set(Calendar.MONTH, month);
                     myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     DateFixed.setText(month+1+"/"+dayOfMonth+"/"+year );
+                    date2 = myCalendar.getTime();
                 }
             };
 
     public void updateTicket(View v) {
 
-        ticket.setTicketId(ticketList.indexOf(ticket)+1);
+        //ticket.setTicketId(ticketList.indexOf(ticket)+1);
+        Log.d("My Log", "element: " +ticket.getTicketId());
 
         ticket.setCustomerName(Name.getText().toString());
 
-        String date_created = new String(DateCreated.toString());
-        ticket.setTicketCreateDate(ticket.stringToDate(date_created));
+        ticket.setTicketCreateDate(date1);
 
         ticket.setProblem(Problem.getText().toString());
 
         ticket.setStatus(Status.getText().toString());
 
-        String date_fixed = new String(DateFixed.toString());
-        ticket.setFixDate(ticket.stringToDate(date_fixed));
+        ticket.setFixDate(date2);
+
+        Log.d("My Log", "index: " + ticketList.indexOf(ticket));
+        ticketList.set(ticketList.indexOf(ticket), ticket);
 
         Intent intent = new Intent(UpdateTicketActivity.this, ListTicketsActivity.class);
-        intent.putParcelableArrayListExtra("TICKETS",ticketList );
+        intent.putParcelableArrayListExtra("TICKETS",ticketList);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -135,12 +145,14 @@ public class UpdateTicketActivity extends AppCompatActivity {
             Intent intent = new Intent(UpdateTicketActivity.this, CreateNewTicketActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
             startActivity(intent);
+            finish();
             return true;
         }
         if(item.getItemId()==R.id.action_ticketList){
             Intent intent = new Intent(UpdateTicketActivity.this, ListTicketsActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
             startActivity(intent);
+            finish();
             return true;
         }
         if(item.getItemId()==R.id.action_settings){

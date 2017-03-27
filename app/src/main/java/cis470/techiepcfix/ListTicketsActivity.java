@@ -17,7 +17,9 @@ import java.util.ArrayList;
 
 public class ListTicketsActivity extends AppCompatActivity {
 
-    ArrayList<Ticket> ticketList = new ArrayList<>();
+    private ArrayList<Ticket> ticketList = new ArrayList<>();
+    private ArrayAdapter<Ticket> adapter;
+    private ListView Ticket_List;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +34,9 @@ public class ListTicketsActivity extends AppCompatActivity {
         }
 
 
-        ArrayAdapter<Ticket> adapter = new ArrayAdapter<>(this, R.layout.tickets, ticketList);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ticketList);
 
-        ListView Ticket_List = (ListView) findViewById(R.id.ticket_list);
+        Ticket_List = (ListView) findViewById(R.id.ticket_list);
         Ticket_List.setAdapter(adapter);
         registerForContextMenu(Ticket_List);
     }
@@ -54,12 +56,17 @@ public class ListTicketsActivity extends AppCompatActivity {
         if(item.getItemId()==R.id.update_update){
             Intent intent = new Intent(ListTicketsActivity.this, UpdateTicketActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
-            intent.putExtra("TICKET", info.position);
+            int sendTicketIndex = info.position;
+            intent.putExtra("MyTicketIndex", sendTicketIndex);
             startActivity(intent);
+            finish();
             return true;
         }
         if(item.getItemId()==R.id.update_delete){
             ticketList.remove(info.position);
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ticketList);
+            Ticket_List = (ListView) findViewById(R.id.ticket_list);
+            Ticket_List.setAdapter(adapter);
             return true;
         }
         return super.onContextItemSelected(item);
@@ -77,11 +84,14 @@ public class ListTicketsActivity extends AppCompatActivity {
             Intent intent = new Intent(ListTicketsActivity.this, CreateNewTicketActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
             startActivity(intent);
+            finish();
             return true;
         }
         if(item.getItemId()==R.id.action_ticketList){
             Intent intent = new Intent(ListTicketsActivity.this, ListTicketsActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
+            startActivity(intent);
+            finish();
             return true;
         }
         if(item.getItemId()==R.id.action_settings){

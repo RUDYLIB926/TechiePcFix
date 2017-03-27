@@ -72,7 +72,8 @@
             android:inputType="date"
             android:textColor="@color/textColor"
             android:textSize="18dp"
-            android:onClick="setDateCreated"/>
+            android:onClick="setDateCreated"
+            android:focusable="false"/>
 
         <TextView
             android:id="@+id/tx3"
@@ -146,7 +147,8 @@
             android:layout_below="@+id/status"
             android:layout_alignRight="@+id/name"
             android:layout_alignEnd="@+id/name"
-            android:onClick="setDateFixed"/>
+            android:onClick="setDateFixed"
+            android:focusable="false"/>
 
     </RelativeLayout>
 

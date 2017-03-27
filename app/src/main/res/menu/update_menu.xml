@@ -4,11 +4,9 @@
     <item
         android:title="Update"
         android:id="@+id/update_update"
-        android:onClick="Update"
         ></item>
     <item
         android:title="Delete"
         android:id="@+id/update_delete"
-        android:onClick="Delete"
         ></item>
 </menu>

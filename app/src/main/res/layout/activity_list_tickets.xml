@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_list_tickets"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorAccent"
     tools:context="cis470.techiepcfix.ListTicketsActivity">
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/ticket_list"
-        android:onClick="updateMenu"
-        android:layout_marginLeft="15dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:textColor="@color/textColor">
     </ListView>
 
-</RelativeLayout>
+</LinearLayout>

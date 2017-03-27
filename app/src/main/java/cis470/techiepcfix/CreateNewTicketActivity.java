@@ -13,24 +13,33 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CreateNewTicketActivity extends AppCompatActivity {
 
-    EditText DateCreated, DateFixed;
-    Calendar myCalendar = Calendar.getInstance();
-    ArrayList<Ticket> ticketList =new ArrayList<>();
+    private EditText DateCreated, DateFixed;
+    private Calendar myCalendar = Calendar.getInstance();
+    private Date date1, date2;
+    private ArrayList<Ticket> ticketList =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_ticket);
         Bundle extras = getIntent().getExtras();
+        //check if anything was passed in from other activities
+        //it is null on launch
         if (extras != null) {
             ticketList = extras.getParcelableArrayList("TICKETS");
         }
         DateCreated = (EditText) findViewById(R.id.date_created);
         DateFixed = (EditText) findViewById(R.id.date_fixed);
 
+//        for debugging
+//        Ticket one = new Ticket(1,"Name1", myCalendar.getTime(), "things", "ture", myCalendar.getTime());
+//        Ticket two = new Ticket(2, "Name2", myCalendar.getTime(), "things", "ture", myCalendar.getTime());
+//        ticketList.add(one);
+//        ticketList.add(two);
     }
 
     public void setDateCreated(View v){
@@ -64,6 +73,7 @@ public class CreateNewTicketActivity extends AppCompatActivity {
                     myCalendar.set(Calendar.MONTH, month);
                     myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     DateCreated.setText(month+1+"/"+dayOfMonth+"/"+year );
+                    date1 = myCalendar.getTime();
 
                 }
             };
@@ -76,6 +86,7 @@ public class CreateNewTicketActivity extends AppCompatActivity {
                     myCalendar.set(Calendar.MONTH, month);
                     myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     DateFixed.setText(month+1+"/"+dayOfMonth+"/"+year );
+                    date2 = myCalendar.getTime();
                 }
             };
 
@@ -85,13 +96,13 @@ public class CreateNewTicketActivity extends AppCompatActivity {
         Ticket newTicket = new Ticket();
         ticketList.add(newTicket);
 
+        //TODO: add try catch blocks for null pointer values or if else condition
         newTicket.setTicketId(ticketList.indexOf(newTicket)+1);
 
         EditText Name = (EditText)findViewById(R.id.name);
         newTicket.setCustomerName(Name.getText().toString());
 
-        String date_created = new String(DateCreated.toString());
-        newTicket.setTicketCreateDate(newTicket.stringToDate(date_created));
+        newTicket.setTicketCreateDate(date1);
 
         EditText Problem = (EditText)findViewById(R.id.problem);
         newTicket.setProblem(Problem.getText().toString());
@@ -99,12 +110,12 @@ public class CreateNewTicketActivity extends AppCompatActivity {
         EditText Status = (EditText)findViewById(R.id.status);
         newTicket.setStatus(Status.getText().toString());
 
-        String date_fixed = new String(DateFixed.toString());
-        newTicket.setFixDate(newTicket.stringToDate(date_fixed));
+        newTicket.setFixDate(date2);
 
         Intent intent = new Intent(CreateNewTicketActivity.this, ListTicketsActivity.class);
         intent.putParcelableArrayListExtra("TICKETS",ticketList );
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -119,12 +130,14 @@ public class CreateNewTicketActivity extends AppCompatActivity {
             Intent intent = new Intent(CreateNewTicketActivity.this, CreateNewTicketActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
             startActivity(intent);
+            finish();
             return true;
         }
         if(item.getItemId()==R.id.action_ticketList){
             Intent intent = new Intent(CreateNewTicketActivity.this, ListTicketsActivity.class);
             intent.putParcelableArrayListExtra("TICKETS",ticketList );
             startActivity(intent);
+            finish();
             return true;
         }
         if(item.getItemId()==R.id.action_settings){

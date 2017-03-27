@@ -71,7 +71,8 @@
             android:textSize="18dp"
             android:layout_below="@+id/update_name"
             android:layout_alignParentEnd="true"
-            android:onClick="setDateCreated"/>
+            android:onClick="setDateCreated"
+            android:focusable="false"/>
 
         <TextView
             android:id="@+id/update_tx3"
@@ -141,7 +142,8 @@
             android:layout_below="@+id/update_status"
             android:layout_alignRight="@+id/update_name"
             android:layout_alignEnd="@+id/update_name"
-            android:onClick="setDateFixed"/>
+            android:onClick="setDateFixed"
+            android:focusable="false"/>
 
     </RelativeLayout>
 
