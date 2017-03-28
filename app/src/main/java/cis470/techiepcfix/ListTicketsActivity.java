@@ -82,7 +82,7 @@ public class ListTicketsActivity extends AppCompatActivity {
             };
 
             AlertDialog.Builder builder = new AlertDialog.Builder(ListTicketsActivity.this);
-            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+            builder.setTitle("Delete Ticket").setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show();
 
             return true;
